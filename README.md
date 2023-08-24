@@ -1,5 +1,7 @@
 # Small header for emulating checked exceptions in C++.
 
+### NOTE BEFORE WE START: This library is not meant to actually be used, and is just a fun experiment in messing with C++ syntax.
+
 In some languages, for example Java, it is possible to declare what exceptions a function may throw, and the compiler can verify that all call sites handle these exceptions, or throws them further up the stack.
 
 In C++ there is no way of doing this; enter [checked_except.h](checked_except.h)
@@ -32,10 +34,12 @@ catch_checked(const std::exception& e) {
 
 ### Pros
 * You are somewhat forced to address exceptions properly.
+* Not handling exceptions is a compile time error.
 * Works on top of classic exception handling.
 
 ### Cons
 * You are somewhat forced to address exceptions properly.
+* Checked exceptions come with a bunch of conceptual problems.
 * The extra argument can be a problem, and doesn't work in e.g. operator overloads.
 * While most of the code is supposed to be collapsed into nothing at runtime, there _will_ probably be an extra entry in the call stack for each catch, and possibly other runtime effects.
 * There are a bit of variadic template shenanigans going on that very well have effects on compile time. 
